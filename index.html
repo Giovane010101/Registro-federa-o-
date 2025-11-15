@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requerimento Único - FTKDERJ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/imask"></script>
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <style>
+        /* Estilos CSS fornecidos e aprimorados */
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+
+        .main-card {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 3rem;
+            border-radius: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-text {
+            font-weight: 800;
+            color: #007bff;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header-text::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #007bff;
+            border-radius: 2px;
+        }
+
+        .header-subtitle {
+            color: #6c757d;
+            font-size: 1.2rem;
+            margin-top: 5px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .form-section {
+            border: 1px solid #e0e6ed;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            background-color: #fdfdfd;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .form-section:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .form-section .card-title {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+        }
+        
+        /* Estilização para tornar campos opcionais na template menos intrusivos */
+        .exame-adicional-item .form-floating label:not(.required-label) {
+             opacity: 0.7;
+        }
+        .exame-adicional-item .form-label:not(.required-label) {
+             opacity: 0.8;
+        }
+
+        .required-label::after {
+            content: ' *';
+            color: #dc3545;
+        }
+
+        .form-floating label {
+            color: #6c757d;
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            height: calc(3.5rem + 2px);
+        }
+
+        .form-floating > .form-control, .form-floating > .form-select {
+            height: calc(3.5rem + 2px);
+        }
+
+        .form-floating > label {
+            padding: 1rem 1rem;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-weight: 600;
+            padding: 15px 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+        }
+        
+        .btn-outline-secondary {
+            border-radius: 10px;
+            font-weight: 600;
+            padding: 10px;
+            border: 2px solid #6c757d;
+        }
+        .btn-outline-secondary:hover {
+             border-color: #007bff;
+             color: #007bff;
+        }
+
+        .foto-preview {
+            width: 150px;
+            height: 150px;
+            border: 4px solid #007bff;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: #f8f9fa;
+            padding: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .foto-preview.has-image {
+            border-color: #28a745;
+        }
+
+        .foto-preview:hover {
+            transform: scale(1.05);
+        }
+        
+        .file-upload-card {
+            background-color: #e9f0ff; 
+            border: 2px dashed #007bff;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+
+        /* Animações */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container main-card">
+        <div class="text-center mb-5">
+            <h3 class="header-text">Requerimento Único 🥋</h3>
+            <p class="header-subtitle">Federação de Taekwondo do Estado do Rio de Janeiro</p>
+        </div>
+
+        <form id="formRequerimento" class="needs-validation" novalidate>
+            
+            <div class="form-section">
+                <h5 class="card-title mb-3">Dados Pessoais</h5>
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="nomeCompleto" placeholder="Nome Completo" required>
+                            <label for="nomeCompleto" class="required-label">Nome Completo</label>
+                            <div class="invalid-feedback">Por favor, preencha o nome completo.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="filiacao" placeholder="Filiação (Pai e Mãe)" required>
+                            <label for="filiacao" class="required-label">Filiação (Nome do Pai e da Mãe)</label>
+                            <div class="invalid-feedback">Por favor, preencha a filiação.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="dataNascimento" class="form-label required-label">Data de Nascimento</label>
+                        <input type="date" class="form-control" id="dataNascimento" required>
+                        <div class="invalid-feedback">Por favor, selecione a data de nascimento.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="natural" placeholder="Natural de (Cidade)" required>
+                            <label for="natural" class="required-label">Natural de</label>
+                            <div class="invalid-feedback">Por favor, preencha a cidade de naturalidade.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="nacionalidade" placeholder="Nacionalidade" value="Brasileira" required>
+                            <label for="nacionalidade" class="required-label">Nacionalidade</label>
+                            <div class="invalid-feedback">Por favor, preencha a nacionalidade.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="estadoCivil" class="form-label required-label">Estado Civil</label>
+                        <select id="estadoCivil" name="estadoCivil" class="form-select" required>
+                            <option value="">Selecione...</option>
+                            <option value="Solteiro(a)">Solteiro(a)</option>
+                            <option value="Casado(a)">Casado(a)</option>
+                            <option value="Divorciado(a)">Divorciado(a)</option>
+                            <option value="Viúvo(a)">Viúvo(a)</option>
+                            <option value="Separado(a)">Separado(a)</option>
+                            <option value="União Estável">União Estável</option>
+                        </select>
+                        <div class="invalid-feedback">Por favor, selecione o estado civil.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="instrucao" class="form-label required-label">Nível de Instrução</label>
+                        <select id="instrucao" name="instrucao" class="form-select" required>
+                            <option value="">Selecione...</option>
+                            <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                            <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+                            <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
+                            <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                            <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                            <option value="Pós-graduação">Pós-graduação</option>
+                            <option value="Mestrado">Mestrado</option>
+                            <option value="Doutorado">Doutorado</option>
+                        </select>
+                        <div class="invalid-feedback">Por favor, selecione o nível de instrução.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="profissao" placeholder="Profissão" required>
+                            <label for="profissao" class="required-label">Profissão</label>
+                            <div class="invalid-feedback">Por favor, preencha a profissão.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h5 class="card-title mb-3">Endereço e Contato</h5>
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="residencia" placeholder="Rua, Número, Complemento" required>
+                            <label for="residencia" class="required-label">Residência (Rua, Nº, Complemento)</label>
+                            <div class="invalid-feedback">Por favor, preencha o endereço de residência.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="bairro" placeholder="Bairro" required>
+                            <label for="bairro" class="required-label">Bairro</label>
+                            <div class="invalid-feedback">Por favor, preencha o bairro.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="cidade" placeholder="Cidade" required>
+                            <label for="cidade" class="required-label">Cidade</label>
+                            <div class="invalid-feedback">Por favor, preencha a cidade.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="uf" class="form-label required-label">UF</label>
+                        <select name="uf" class="form-select" id="uf" required>
+                            <option value="">Selecione...</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AP">AP</option>
+                            <option value="AM">AM</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MT">MT</option>
+                            <option value="MS">MS</option>
+                            <option value="MG">MG</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PR">PR</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RS">RS</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="SC">SC</option>
+                            <option value="SP">SP</option>
+                            <option value="SE">SE</option>
+                            <option value="TO">TO</option>
+                        </select>
+                        <div class="invalid-feedback">Por favor, selecione a UF.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="cep" placeholder="CEP" required>
+                            <label for="cep" class="required-label">CEP</label>
+                            <div class="invalid-feedback">Por favor, preencha o CEP.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="celular" placeholder="Telefone Celular" required>
+                            <label for="celular" class="required-label">Telefone Celular</label>
+                            <div class="invalid-feedback">Por favor, preencha o celular.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="email" placeholder="Email" required>
+                            <label for="email" class="required-label">E-mail</label>
+                            <div class="invalid-feedback">Por favor, preencha o e-mail.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h5 class="card-title mb-3">Informações Físicas e Documentos</h5>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="peso" placeholder="Peso (kg)" required>
+                            <label for="peso" class="required-label">Peso (kg)</label>
+                            <div class="invalid-feedback">Por favor, preencha o peso.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Use o formato 1.75">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="altura" placeholder="Altura (m)" required>
+                            <label for="altura" class="required-label">Altura (m) - Ex: 1.75</label>
+                            <div class="invalid-feedback">Por favor, preencha a altura.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="cor" class="form-label required-label">Cor/Raça</label>
+                        <select id="cor" name="cor" class="form-select" required>
+                            <option value="">Selecione...</option>
+                            <option value="Branco">Branco</option>
+                            <option value="Preto">Preto</option>
+                            <option value="Pardo">Pardo</option>
+                            <option value="Amarelo">Amarelo</option>
+                            <option value="Indígena">Indígena</option>
+                        </select>
+                        <div class="invalid-feedback">Por favor, selecione a cor/raça.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="sangue" class="form-label required-label">Tipo Sanguíneo</label>
+                        <select id="sangue" name="sangue" class="form-select" required>
+                            <option value="">Selecione...</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                        <div class="invalid-feedback">Por favor, selecione o tipo sanguíneo.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="sexo" class="form-label required-label">Sexo</label>
+                        <select id="sexo" name="sexo" class="form-select" required>
+                            <option value="">Selecione...</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                        </select>
+                        <div class="invalid-feedback">Por favor, selecione o sexo.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="rg" placeholder="Identidade (RG)">
+                            <label for="rg">Identidade (RG)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="orgaoEmissor" placeholder="Órgão Emissor" required>
+                            <label for="orgaoEmissor" class="required-label">Órgão Emissor (Ex: DETRAN)</label>
+                            <div class="invalid-feedback">Por favor, preencha o órgão emissor.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="emissaoRG" class="form-label required-label">Data de Emissão do RG</label>
+                        <input type="date" class="form-control" id="emissaoRG" required>
+                        <div class="invalid-feedback">Por favor, selecione a data de emissão do RG.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="cpf" placeholder="CPF" required>
+                            <label for="cpf" class="required-label">CPF</label>
+                            <div class="invalid-feedback">Por favor, preencha o CPF.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h5 class="card-title mb-3">Dados do Taekwondo</h5>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label for="inicioTKD" class="form-label required-label">Início no Taekwondo</label>
+                        <input type="date" class="form-control" id="inicioTKD" required>
+                        <div class="invalid-feedback">Por favor, selecione a data de início.</div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="entidade" placeholder="Entidade de Origem" required>
+                            <label for="entidade" class="required-label">Entidade de Origem (Academia)</label>
+                            <div class="invalid-feedback">Por favor, preencha a entidade de origem.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="professor" placeholder="Professor" required>
+                            <label for="professor" class="required-label">Professor(a)</label>
+                            <div class="invalid-feedback">Por favor, preencha o nome do professor.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="danProfessor" class="form-label required-label">Graduação (Dan) do Professor</label>
+                        <select id="danProfessor" class="form-select" required>
+                            <option value="">Selecione...</option>
+                            <option value="1º Dan">1º Dan</option>
+                            <option value="2º Dan">2º Dan</option>
+                            <option value="3º Dan">3º Dan</option>
+                            <option value="4º Dan">4º Dan</option>
+                            <option value="5º Dan">5º Dan</option>
+                            <option value="6º Dan">6º Dan</option>
+                            <option value="7º Dan">7º Dan</option>
+                            <option value="8º Dan">8º Dan</option>
+                            <option value="9º Dan">9º Dan</option>
+                        </select>
+                        <div class="invalid-feedback">Por favor, selecione a graduação do professor.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="mestre" placeholder="Mestre" required>
+                            <label for="mestre" class="required-label">Mestre</label>
+                            <div class="invalid-feedback">Por favor, preencha o nome do Mestre.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="danMestre" class="form-label required-label">Graduação (Dan) do Mestre</label>
+                        <select id="danMestre" class="form-select" required>
+                            <option value="">Selecione...</option>
+                            <option value="1º Dan">1º Dan</option>
+                            <option value="2º Dan">2º Dan</option>
+                            <option value="3º Dan">3º Dan</option>
+                            <option value="4º Dan">4º Dan</option>
+                            <option value="5º Dan">5º Dan</option>
+                            <option value="6º Dan">6º Dan</option>
+                            <option value="7º Dan">7º Dan</option>
+                            <option value="8º Dan">8º Dan</option>
+                            <option value="9º Dan">9º Dan</option>
+                        </select>
+                        <div class="invalid-feedback">Por favor, selecione a graduação do Mestre.</div>
+                    </div>
+
+                    <hr class="mt-4 mb-4">
+                    <h6 class="mb-3 text-primary">Informações de Graduação Principal</h6>
+
+                    <div id="graduacao-principal" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="tipoGraduacao" class="form-label required-label">Tipo</label>
+                            <select id="tipoGraduacao" name="tipoGraduacao" class="form-select" required>
+                                <option value="">Selecione...</option>
+                                <option value="DAN">DAN</option>
+                                <option value="GUB">GUB</option>
+                            </select>
+                            <div class="invalid-feedback">Selecione o tipo de graduação (DAN/GUB).</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="numGraduacao" name="numGraduacao" placeholder="Número (1 a 9)" min="1" max="9" required>
+                                <label for="numGraduacao" class="required-label">Número (1 a 9)</label>
+                                <div class="invalid-feedback">Informe o número da graduação (1 a 9).</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="gradData" class="form-label required-label">Data da Graduação</label>
+                            <input type="date" class="form-control" id="gradData" name="gradData" required>
+                            <div class="invalid-feedback">Selecione a data da graduação.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="gradLocal" name="gradLocal" placeholder="Local da Graduação" required>
+                                <label for="gradLocal" class="required-label">Local da Graduação</label>
+                                <div class="invalid-feedback">Preencha o local da graduação.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="gradGMestre" name="gradGMestre" placeholder="Grão-Mestre Examinador" required>
+                                <label for="gradGMestre" class="required-label">Grão-Mestre Examinador</label>
+                                <div class="invalid-feedback">Preencha o nome do Grão-Mestre.</div>
+                            </div>
+                        </div>
+                    </div> 
+                </div> 
+                <hr class="mt-4 mb-4">
+                <h6 class="mb-3 text-secondary">Graduações Anteriores (Opcional)</h6>
+
+                <template id="graduacao-template">
+                    <div class="row g-3 exame-adicional-item pt-4 mt-4" id="graduacao-adicional-NUM_PLACEHOLDER"> 
+                        <div class="col-12 d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="text-secondary mb-0">Graduação Adicional #NUM_PLACEHOLDER</h6>
+                            <button type="button" class="btn btn-sm btn-danger" onclick="removerExameAdicional('graduacao-adicional-NUM_PLACEHOLDER')">
+                                Remover
+                            </button>
+                        </div>
+                        <hr>
+                        
+                        <div class="col-md-4">
+                            <label for="tipoGraduacao_X" class="form-label">Tipo</label>
+                            <select id="tipoGraduacao_X" name="graduacoesAdicionais[][tipo]" class="form-select">
+                                <option value="">Selecione...</option>
+                                <option value="DAN">DAN</option>
+                                <option value="GUB">GUB</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="numGraduacao_X" name="graduacoesAdicionais[][numero]" placeholder="Número (1 a 9)" min="1" max="9">
+                                <label for="numGraduacao_X">Número (1 a 9)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="gradData_X" class="form-label">Data da Graduação</label>
+                            <input type="date" class="form-control" id="gradData_X" name="graduacoesAdicionais[][data]">
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="gradLocal_X" name="graduacoesAdicionais[][local]" placeholder="Local da Graduação">
+                                <label for="gradLocal_X">Local da Graduação</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="gradGMestre_X" name="graduacoesAdicionais[][mestre]" placeholder="Grão-Mestre Examinador">
+                                <label for="gradGMestre_X">Grão-Mestre Examinador</label>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div id="graduacoes-adicionais" class="row g-3">
+                </div>
+                
+                <div class="col-12 mt-4">
+                    <button type="button" class="btn btn-outline-secondary w-100" onclick="adicionarExameAdicional()">
+                        + Adicionar Graduação Anterior
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h5 class="card-title mb-3 text-center">Anexos Obrigatórios 📎</h5>
+                <div class="row g-4 align-items-center file-upload-card">
+                    
+                    <div class="col-md-4 text-center">
+                        <label for="foto" class="form-label required-label mb-3">Foto 3x4 Digital</label>
+                        <div class="d-flex justify-content-center mb-3">
+                            <img id="fotoPrev" class="foto-preview" 
+                                src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ccc' d='M50 0a50 50 0 1 0 0 100 50 50 0 0 0 0-100zm0 15a35 35 0 1 1 0 70 35 35 0 0 1 0-70zm-5 15a5 5 0 1 1-10 0 5 5 0 0 1 10 0zM50 40c-13.8 0-25 11.2-25 25v5h50v-5c0-13.8-11.2-25-25-25z'/%3E%3C/svg%3E" 
+                                alt="Pré-visualização da Foto 3x4">
+                        </div>
+                        <input type="file" class="form-control" id="foto" required accept="image/png, image/jpeg, image/jpg">
+                        <div class="invalid-feedback">Anexe a foto 3x4.</div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="identidadeFrente" class="form-label required-label">Identidade (Frente)</label>
+                                <input type="file" class="form-control" id="identidadeFrente" required 
+                                    accept="image/png, image/jpeg, image/jpg" aria-describedby="frenteHelp">
+                                <div class="form-text" id="frenteHelp">Apenas formatos JPG/PNG/JPEG.</div>
+                                <div class="invalid-feedback">Anexe a frente da identidade.</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="identidadeVerso" class="form-label required-label">Identidade (Verso)</label>
+                                <input type="file" class="form-control" id="identidadeVerso" required 
+                                    accept="image/png, image/jpeg, image/jpg" aria-describedby="versoHelp">
+                                <div class="form-text" id="versoHelp">Apenas formatos JPG/PNG/JPEG.</div>
+                                <div class="invalid-feedback">Anexe o verso da identidade.</div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="comprovanteResidencia" class="form-label required-label">Comprovante de Residência</label>
+                                <input type="file" class="form-control" id="comprovanteResidencia" required 
+                                    accept="image/png, image/jpeg, image/jpg" aria-describedby="compHelp">
+                                <div class="form-text" id="compHelp">Pode ser imagem (JPG/PNG/JPEG).</div>
+                                <div class="invalid-feedback">Anexe o comprovante de residência.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h5 class="card-title mb-3">Finalização</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="dataReq" class="form-label required-label">Data do Requerimento</label>
+                        <input type="date" class="form-control" id="dataReq" required>
+                        <div class="invalid-feedback">Por favor, selecione a data do requerimento.</div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">Gerar PDF de Requerimento 🚀</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    
+    <script src="https://unpkg.com/imask"></script>
+
+    <script src="script.js"></script>
+</body>
