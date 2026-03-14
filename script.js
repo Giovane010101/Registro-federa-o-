@@ -166,9 +166,20 @@ document.addEventListener('DOMContentLoaded', () => {
             // Função para escrever texto em coordenadas do Scribus (pt)
             function writePt(id, x_pt, y_scribus_pt, size = 9, align = 'left') {
                 const el = document.getElementById(id);
-                if (!el || !el.value) return;
-                let text = el.value.toString();
-                if (el.type === 'date') text = formatDateIfISO(el.value);
+                let text = el ? el.value.toString() : "";
+
+                // --- NOVA REGRA DO RG: Se o RG estiver vazio, tenta usar o CPF ---
+                if (id === 'rg' && text.trim() === "") {
+                    const cpfEl = document.getElementById('cpf');
+                    if (cpfEl && cpfEl.value) {
+                        text = cpfEl.value.toString();
+                    }
+                }
+
+                if (!text) return; // Se ainda assim estiver vazio, sai da função sem escrever
+
+                if (el && el.type === 'date') text = formatDateIfISO(el.value);
+
                 // O valor 0.3 ajusta a linha base do texto
                 const y = height - y_scribus_pt - size * 0.3;
 
