@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,13 +73,14 @@
             margin-bottom: 1.5rem;
             font-size: 1.6rem;
         }
-        
+
         /* Estilização para tornar campos opcionais na template menos intrusivos */
         .exame-adicional-item .form-floating label:not(.required-label) {
-             opacity: 0.7;
+            opacity: 0.7;
         }
+
         .exame-adicional-item .form-label:not(.required-label) {
-             opacity: 0.8;
+            opacity: 0.8;
         }
 
         .required-label::after {
@@ -90,21 +92,24 @@
             color: #6c757d;
         }
 
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             border-radius: 10px;
             padding: 0.75rem 1rem;
             height: calc(3.5rem + 2px);
         }
 
-        .form-floating > .form-control, .form-floating > .form-select {
+        .form-floating>.form-control,
+        .form-floating>.form-select {
             height: calc(3.5rem + 2px);
         }
 
-        .form-floating > label {
+        .form-floating>label {
             padding: 1rem 1rem;
         }
 
-        .form-control:focus, .form-select:focus {
+        .form-control:focus,
+        .form-select:focus {
             border-color: #007bff;
             box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
         }
@@ -125,16 +130,17 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
         }
-        
+
         .btn-outline-secondary {
             border-radius: 10px;
             font-weight: 600;
             padding: 10px;
             border: 2px solid #6c757d;
         }
+
         .btn-outline-secondary:hover {
-             border-color: #007bff;
-             color: #007bff;
+            border-color: #007bff;
+            color: #007bff;
         }
 
         .foto-preview {
@@ -148,7 +154,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
-        
+
         .foto-preview.has-image {
             border-color: #28a745;
         }
@@ -156,9 +162,9 @@
         .foto-preview:hover {
             transform: scale(1.05);
         }
-        
+
         .file-upload-card {
-            background-color: #e9f0ff; 
+            background-color: #e9f0ff;
             border: 2px dashed #007bff;
             padding: 2rem;
             border-radius: 15px;
@@ -167,16 +173,33 @@
 
         /* Animações */
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
     <div class="container main-card">
@@ -186,20 +209,22 @@
         </div>
 
         <form id="formRequerimento" class="needs-validation" novalidate>
-            
+
             <div class="form-section">
                 <h5 class="card-title mb-3">Dados Pessoais</h5>
                 <div class="row g-3">
                     <div class="col-md-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="nomeCompleto" placeholder="Nome Completo" required>
+                            <input type="text" class="form-control" id="nomeCompleto" placeholder="Nome Completo"
+                                required>
                             <label for="nomeCompleto" class="required-label">Nome Completo</label>
                             <div class="invalid-feedback">Por favor, preencha o nome completo.</div>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="filiacao" placeholder="Filiação (Pai e Mãe)" required>
+                            <input type="text" class="form-control" id="filiacao" placeholder="Filiação (Pai e Mãe)"
+                                required>
                             <label for="filiacao" class="required-label">Filiação (Nome do Pai e da Mãe)</label>
                             <div class="invalid-feedback">Por favor, preencha a filiação.</div>
                         </div>
@@ -211,14 +236,16 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="natural" placeholder="Natural de (Cidade)" required>
+                            <input type="text" class="form-control" id="natural" placeholder="Natural de (Cidade)"
+                                required>
                             <label for="natural" class="required-label">Natural de</label>
                             <div class="invalid-feedback">Por favor, preencha a cidade de naturalidade.</div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="nacionalidade" placeholder="Nacionalidade" value="Brasileira" required>
+                            <input type="text" class="form-control" id="nacionalidade" placeholder="Nacionalidade"
+                                value="Brasileira" required>
                             <label for="nacionalidade" class="required-label">Nacionalidade</label>
                             <div class="invalid-feedback">Por favor, preencha a nacionalidade.</div>
                         </div>
@@ -261,13 +288,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-section">
                 <h5 class="card-title mb-3">Endereço e Contato</h5>
                 <div class="row g-3">
                     <div class="col-md-8">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="residencia" placeholder="Rua, Número, Complemento" required>
+                            <input type="text" class="form-control" id="residencia"
+                                placeholder="Rua, Número, Complemento" required>
                             <label for="residencia" class="required-label">Residência (Rua, Nº, Complemento)</label>
                             <div class="invalid-feedback">Por favor, preencha o endereço de residência.</div>
                         </div>
@@ -329,7 +357,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="celular" placeholder="Telefone Celular" required>
+                            <input type="text" class="form-control" id="celular" placeholder="Telefone Celular"
+                                required>
                             <label for="celular" class="required-label">Telefone Celular</label>
                             <div class="invalid-feedback">Por favor, preencha o celular.</div>
                         </div>
@@ -343,7 +372,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-section">
                 <h5 class="card-title mb-3">Informações Físicas e Documentos</h5>
                 <div class="row g-3">
@@ -405,7 +434,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="orgaoEmissor" placeholder="Órgão Emissor" required>
+                            <input type="text" class="form-control" id="orgaoEmissor" placeholder="Órgão Emissor"
+                                required>
                             <label for="orgaoEmissor" class="required-label">Órgão Emissor (Ex: DETRAN)</label>
                             <div class="invalid-feedback">Por favor, preencha o órgão emissor.</div>
                         </div>
@@ -424,7 +454,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-section">
                 <h5 class="card-title mb-3">Dados do Taekwondo</h5>
                 <div class="row g-3">
@@ -435,7 +465,8 @@
                     </div>
                     <div class="col-md-8">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="entidade" placeholder="Entidade de Origem" required>
+                            <input type="text" class="form-control" id="entidade" placeholder="Entidade de Origem"
+                                required>
                             <label for="entidade" class="required-label">Entidade de Origem (Academia)</label>
                             <div class="invalid-feedback">Por favor, preencha a entidade de origem.</div>
                         </div>
@@ -502,7 +533,8 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating">
-                                <input type="number" class="form-control" id="numGraduacao" name="numGraduacao" placeholder="Número (1 a 9)" min="1" max="9" required>
+                                <input type="number" class="form-control" id="numGraduacao" name="numGraduacao"
+                                    placeholder="Número (1 a 9)" min="1" max="9" required>
                                 <label for="numGraduacao" class="required-label">Número (1 a 9)</label>
                                 <div class="invalid-feedback">Informe o número da graduação (1 a 9).</div>
                             </div>
@@ -515,33 +547,36 @@
 
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="gradLocal" name="gradLocal" placeholder="Local da Graduação" required>
+                                <input type="text" class="form-control" id="gradLocal" name="gradLocal"
+                                    placeholder="Local da Graduação" required>
                                 <label for="gradLocal" class="required-label">Local da Graduação</label>
                                 <div class="invalid-feedback">Preencha o local da graduação.</div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="gradGMestre" name="gradGMestre" placeholder="Grão-Mestre Examinador" required>
+                                <input type="text" class="form-control" id="gradGMestre" name="gradGMestre"
+                                    placeholder="Grão-Mestre Examinador" required>
                                 <label for="gradGMestre" class="required-label">Grão-Mestre Examinador</label>
                                 <div class="invalid-feedback">Preencha o nome do Grão-Mestre.</div>
                             </div>
                         </div>
-                    </div> 
-                </div> 
+                    </div>
+                </div>
                 <hr class="mt-4 mb-4">
                 <h6 class="mb-3 text-secondary">Graduações Anteriores (Opcional)</h6>
 
                 <template id="graduacao-template">
-                    <div class="row g-3 exame-adicional-item pt-4 mt-4" id="graduacao-adicional-NUM_PLACEHOLDER"> 
+                    <div class="row g-3 exame-adicional-item pt-4 mt-4" id="graduacao-adicional-NUM_PLACEHOLDER">
                         <div class="col-12 d-flex justify-content-between align-items-center mb-3">
                             <h6 class="text-secondary mb-0">Graduação Adicional #NUM_PLACEHOLDER</h6>
-                            <button type="button" class="btn btn-sm btn-danger" onclick="removerExameAdicional('graduacao-adicional-NUM_PLACEHOLDER')">
+                            <button type="button" class="btn btn-sm btn-danger"
+                                onclick="removerExameAdicional('graduacao-adicional-NUM_PLACEHOLDER')">
                                 Remover
                             </button>
                         </div>
                         <hr>
-                        
+
                         <div class="col-md-4">
                             <label for="tipoGraduacao_X" class="form-label">Tipo</label>
                             <select id="tipoGraduacao_X" name="graduacoesAdicionais[][tipo]" class="form-select">
@@ -552,7 +587,8 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating">
-                                <input type="number" class="form-control" id="numGraduacao_X" name="graduacoesAdicionais[][numero]" placeholder="Número (1 a 9)" min="1" max="9">
+                                <input type="number" class="form-control" id="numGraduacao_X"
+                                    name="graduacoesAdicionais[][numero]" placeholder="Número (1 a 9)" min="1" max="9">
                                 <label for="numGraduacao_X">Número (1 a 9)</label>
                             </div>
                         </div>
@@ -563,13 +599,15 @@
 
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="gradLocal_X" name="graduacoesAdicionais[][local]" placeholder="Local da Graduação">
+                                <input type="text" class="form-control" id="gradLocal_X"
+                                    name="graduacoesAdicionais[][local]" placeholder="Local da Graduação">
                                 <label for="gradLocal_X">Local da Graduação</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="gradGMestre_X" name="graduacoesAdicionais[][mestre]" placeholder="Grão-Mestre Examinador">
+                                <input type="text" class="form-control" id="gradGMestre_X"
+                                    name="graduacoesAdicionais[][mestre]" placeholder="Grão-Mestre Examinador">
                                 <label for="gradGMestre_X">Grão-Mestre Examinador</label>
                             </div>
                         </div>
@@ -577,7 +615,7 @@
                 </template>
                 <div id="graduacoes-adicionais" class="row g-3">
                 </div>
-                
+
                 <div class="col-12 mt-4">
                     <button type="button" class="btn btn-outline-secondary w-100" onclick="adicionarExameAdicional()">
                         + Adicionar Graduação Anterior
@@ -588,45 +626,19 @@
             <div class="form-section">
                 <h5 class="card-title mb-3 text-center">Anexos Obrigatórios 📎</h5>
                 <div class="row g-4 align-items-center file-upload-card">
-                    
-                    <div class="col-md-4 text-center">
+
+                    <div class="col-md-6 mx-auto text-center">
                         <label for="foto" class="form-label required-label mb-3">Foto 3x4 Digital</label>
                         <div class="d-flex justify-content-center mb-3">
-                            <img id="fotoPrev" class="foto-preview" 
-                                src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ccc' d='M50 0a50 50 0 1 0 0 100 50 50 0 0 0 0-100zm0 15a35 35 0 1 1 0 70 35 35 0 0 1 0-70zm-5 15a5 5 0 1 1-10 0 5 5 0 0 1 10 0zM50 40c-13.8 0-25 11.2-25 25v5h50v-5c0-13.8-11.2-25-25-25z'/%3E%3C/svg%3E" 
+                            <img id="fotoPrev" class="foto-preview"
+                                src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ccc' d='M50 0a50 50 0 1 0 0 100 50 50 0 0 0 0-100zm0 15a35 35 0 1 1 0 70 35 35 0 0 1 0-70zm-5 15a5 5 0 1 1-10 0 5 5 0 0 1 10 0zM50 40c-13.8 0-25 11.2-25 25v5h50v-5c0-13.8-11.2-25-25-25z'/%3E%3C/svg%3E"
                                 alt="Pré-visualização da Foto 3x4">
                         </div>
-                        <input type="file" class="form-control" id="foto" required accept="image/png, image/jpeg, image/jpg">
+                        <input type="file" class="form-control" id="foto" required
+                            accept="image/png, image/jpeg, image/jpg">
                         <div class="invalid-feedback">Anexe a foto 3x4.</div>
                     </div>
 
-                    <div class="col-md-8">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="identidadeFrente" class="form-label required-label">Identidade (Frente)</label>
-                                <input type="file" class="form-control" id="identidadeFrente" required 
-                                    accept="image/png, image/jpeg, image/jpg" aria-describedby="frenteHelp">
-                                <div class="form-text" id="frenteHelp">Apenas formatos JPG/PNG/JPEG.</div>
-                                <div class="invalid-feedback">Anexe a frente da identidade.</div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="identidadeVerso" class="form-label required-label">Identidade (Verso)</label>
-                                <input type="file" class="form-control" id="identidadeVerso" required 
-                                    accept="image/png, image/jpeg, image/jpg" aria-describedby="versoHelp">
-                                <div class="form-text" id="versoHelp">Apenas formatos JPG/PNG/JPEG.</div>
-                                <div class="invalid-feedback">Anexe o verso da identidade.</div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="comprovanteResidencia" class="form-label required-label">Comprovante de Residência</label>
-                                <input type="file" class="form-control" id="comprovanteResidencia" required 
-                                    accept="image/png, image/jpeg, image/jpg" aria-describedby="compHelp">
-                                <div class="form-text" id="compHelp">Pode ser imagem (JPG/PNG/JPEG).</div>
-                                <div class="invalid-feedback">Anexe o comprovante de residência.</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -645,10 +657,12 @@
             </div>
         </form>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
     <script src="https://unpkg.com/imask"></script>
 
     <script src="script.js"></script>
 </body>
+
+</html>
